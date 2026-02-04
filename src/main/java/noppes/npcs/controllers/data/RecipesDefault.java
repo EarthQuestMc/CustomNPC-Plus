@@ -156,40 +156,6 @@ public class RecipesDefault {
                 addRecipe("BigSign", new ItemStack(CustomItems.bigsign, 2), false, "XXX", "XXX", "XXX", 'X', Blocks.planks);
 
             }
-            if (!ConfigItem.DisableExtraItems) {
-                addRecipe("Battle Axe1", CustomItems.battleAxeWood, false, "XX", "XY", " Y", " Y", 'Y', Items.stick, 'X', Blocks.planks);
-                addRecipe("Battle Axe2", CustomItems.battleAxeStone, false, "XX", "XY", " Y", " Y", 'Y', Items.stick, 'X', Blocks.cobblestone);
-                addRecipe("Battle Axe3", CustomItems.battleAxeIron, false, "XX", "XY", " Y", " Y", 'Y', Items.stick, 'X', Items.iron_ingot);
-                addRecipe("Battle Axe4", CustomItems.battleAxeGold, false, "XX", "XY", " Y", " Y", 'Y', Items.stick, 'X', Items.gold_ingot);
-                addRecipe("Battle Axe5", CustomItems.battleAxeDiamond, false, "XX", "XY", " Y", " Y", 'Y', Items.stick, 'X', Items.diamond);
-                addRecipe("Battle Axe6", CustomItems.battleAxeBronze, false, "XX", "XY", " Y", " Y", 'Y', Items.stick, 'X', CustomItems.bronze_ingot);
-                addRecipe("Battle Axe7", CustomItems.battleAxeEmerald, false, "XX", "XY", " Y", " Y", 'Y', Items.stick, 'X', Items.emerald);
-
-                addRecipe("Halberd1", CustomItems.halberdWood, false, " X ", "XYX", " Y ", " Y ", 'Y', Items.stick, 'X', Blocks.planks);
-                addRecipe("Halberd2", CustomItems.halberdStone, false, " X ", "XYX", " Y ", " Y ", 'Y', Items.stick, 'X', Blocks.cobblestone);
-                addRecipe("Halberd3", CustomItems.halberdIron, false, " X ", "XYX", " Y ", " Y ", 'Y', Items.stick, 'X', Items.iron_ingot);
-                addRecipe("Halberd4", CustomItems.halberdGold, false, " X ", "XYX", " Y ", " Y ", 'Y', Items.stick, 'X', Items.gold_ingot);
-                addRecipe("Halberd5", CustomItems.halberdDiamond, false, " X ", "XYX", " Y ", " Y ", 'Y', Items.stick, 'X', Items.diamond);
-                addRecipe("Halberd6", CustomItems.halberdBronze, false, " X ", "XYX", " Y ", " Y ", 'Y', Items.stick, 'X', CustomItems.bronze_ingot);
-                addRecipe("Halberd7", CustomItems.halberdEmerald, false, " X ", "XYX", " Y ", " Y ", 'Y', Items.stick, 'X', Items.emerald);
-
-                addRecipe("Glaive1", CustomItems.glaiveWood, false, "X   ", " Y  ", "  Y ", "   X", 'Y', Items.stick, 'X', Blocks.planks);
-                addRecipe("Glaive2", CustomItems.glaiveStone, false, "X   ", " Y  ", "  Y ", "   X", 'Y', Items.stick, 'X', Blocks.cobblestone);
-                addRecipe("Glaive3", CustomItems.glaiveIron, false, "X   ", " Y  ", "  Y ", "   X", 'Y', Items.stick, 'X', Items.iron_ingot);
-                addRecipe("Glaive4", CustomItems.glaiveGold, false, "X   ", " Y  ", "  Y ", "   X", 'Y', Items.stick, 'X', Items.gold_ingot);
-                addRecipe("Glaive5", CustomItems.glaiveDiamond, false, "X   ", " Y  ", "  Y ", "   X", 'Y', Items.stick, 'X', Items.diamond);
-                addRecipe("Glaive6", CustomItems.glaiveBronze, false, "X   ", " Y  ", "  Y ", "   X", 'Y', Items.stick, 'X', CustomItems.bronze_ingot);
-                addRecipe("Glaive7", CustomItems.glaiveEmerald, false, "X   ", " Y  ", "  Y ", "   X", 'Y', Items.stick, 'X', Items.emerald);
-
-                addRecipe("Trident1", CustomItems.tridentWood, false, "X X", " X ", " Y ", " Y ", 'Y', Items.stick, 'X', Blocks.planks);
-                addRecipe("Trident2", CustomItems.tridentStone, false, "X X", " X ", " Y ", " Y ", 'Y', Items.stick, 'X', Blocks.cobblestone);
-                addRecipe("Trident3", CustomItems.tridentIron, false, "X X", " X ", " Y ", " Y ", 'Y', Items.stick, 'X', Items.iron_ingot);
-                addRecipe("Trident4", CustomItems.tridentGold, false, "X X", " X ", " Y ", " Y ", 'Y', Items.stick, 'X', Items.gold_ingot);
-                addRecipe("Trident5", CustomItems.tridentDiamond, false, "X X", " X ", " Y ", " Y ", 'Y', Items.stick, 'X', Items.diamond);
-                addRecipe("Trident6", CustomItems.tridentBronze, false, "X X", " X ", " Y ", " Y ", 'Y', Items.stick, 'X', CustomItems.bronze_ingot);
-                addRecipe("Trident7", CustomItems.tridentEmerald, false, "X X", " X ", " Y ", " Y ", 'Y', Items.stick, 'X', Items.emerald);
-
-            }
         }
     }
 }

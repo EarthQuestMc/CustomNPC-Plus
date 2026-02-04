@@ -46,41 +46,6 @@ public class GuiCNPCInventory extends GuiNPCInterface {
         questsButton.renderResource = specialIcons;
         addSideButton(questsButton);
 
-        if (ClientCacheHandler.allowParties) {
-            y += 21;
-            GuiMenuSideButton partyButton = new GuiMenuSideButton(-101, guiLeft + xSize + 37, this.guiTop + y, 22, 22, "");
-            partyButton.rightSided = true;
-            partyButton.active = activeTab == -101;
-            partyButton.renderResource = specialIcons;
-            addSideButton(partyButton);
-        }
-        if (ConfigClient.enableFactionTab) {
-            y += 21;
-            GuiMenuSideButton factionButton = new GuiMenuSideButton(-102, guiLeft + xSize + 37, this.guiTop + y, 22, 22, "");
-            factionButton.rightSided = true;
-            factionButton.active = activeTab == -102;
-            factionButton.renderIconPosX = 48;
-            factionButton.renderResource = specialIcons;
-            addSideButton(factionButton);
-        }
-        if (ClientCacheHandler.allowProfiles) {
-            y += 21;
-            GuiMenuSideButton profileButton = new GuiMenuSideButton(-104, guiLeft + xSize + 37, this.guiTop + y, 22, 22, "");
-            profileButton.rightSided = true;
-            profileButton.active = activeTab == -104;
-            profileButton.renderIconPosX = 64;
-            profileButton.renderResource = specialIcons;
-            addSideButton(profileButton);
-        }
-
-        y += 21;
-        GuiMenuSideButton clientButton = new GuiMenuSideButton(-103, guiLeft + xSize + 37, this.guiTop + y, 22, 22, "");
-        clientButton.rightSided = true;
-        clientButton.active = activeTab == -103;
-        clientButton.renderIconPosX = 16;
-        clientButton.renderResource = specialIcons;
-        addSideButton(clientButton);
-
         int effectBarX = guiLeft - 40;
         int effectBarY = guiTop + 10;
         int effectBarWidth = 28;
