@@ -103,26 +103,9 @@ public class GuiCNPCInventory extends GuiNPCInterface {
                 activeTab = -100;
                 mc.displayGuiScreen(new GuiQuestLog());
             }
-            if (guibutton.id == -101 && activeTab != -101) {
-                activeTab = -101;
-                mc.displayGuiScreen(new GuiParty());
-            }
-            if (guibutton.id == -102 && activeTab != -102) {
-                activeTab = -102;
-                mc.displayGuiScreen(new GuiFaction());
-            }
-            if (guibutton.id == -103 && activeTab != -103) {
-                activeTab = -103;
-                mc.displayGuiScreen(new GuiSettings());
-            }
-            if (guibutton.id == -104 && activeTab != -104) {
-                activeTab = -104;
-                mc.displayGuiScreen(new GuiProfiles());
-            }
         }
     }
 
     @Override
-    public void save() {
-    }
+    public void save() { }
 }
