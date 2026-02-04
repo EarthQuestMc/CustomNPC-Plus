@@ -77,7 +77,6 @@ import noppes.npcs.client.gui.GuiNpcPather;
 import noppes.npcs.client.gui.GuiNpcRedstoneBlock;
 import noppes.npcs.client.gui.GuiNpcRemoteEditor;
 import noppes.npcs.client.gui.GuiNpcWaypoint;
-import noppes.npcs.client.gui.GuiScript;
 import noppes.npcs.client.gui.custom.GuiCustom;
 import noppes.npcs.client.gui.global.GuiNPCManageAnimations;
 import noppes.npcs.client.gui.global.GuiNPCManageBanks;
@@ -120,15 +119,11 @@ import noppes.npcs.client.gui.roles.GuiNpcFollowerSetup;
 import noppes.npcs.client.gui.roles.GuiNpcItemGiver;
 import noppes.npcs.client.gui.roles.GuiNpcTraderSetup;
 import noppes.npcs.client.gui.roles.GuiNpcTransporter;
-import noppes.npcs.client.gui.script.GuiScriptBlock;
-import noppes.npcs.client.gui.script.GuiScriptGlobal;
-import noppes.npcs.client.gui.script.GuiScriptItem;
 import noppes.npcs.client.model.ModelNPCGolem;
 import noppes.npcs.client.model.ModelNpcCrystal;
 import noppes.npcs.client.model.ModelNpcDragon;
 import noppes.npcs.client.model.ModelNpcSlime;
 import noppes.npcs.client.model.ModelSkirtArmor;
-import noppes.npcs.client.renderer.NpcItemRenderer;
 import noppes.npcs.client.renderer.RenderCustomNpc;
 import noppes.npcs.client.renderer.RenderNPCHumanMale;
 import noppes.npcs.client.renderer.RenderNPCPony;
@@ -166,10 +161,8 @@ import noppes.npcs.client.renderer.blocks.BlockWeaponRackRenderer;
 import noppes.npcs.client.renderer.items.ItemBannerRenderer;
 import noppes.npcs.client.renderer.items.ItemBannerWallRenderer;
 import noppes.npcs.client.renderer.items.ItemCouchWoolRenderer;
-import noppes.npcs.client.renderer.items.ItemCustomRenderer;
 import noppes.npcs.client.renderer.items.ItemShortLampRenderer;
 import noppes.npcs.client.renderer.items.ItemTallLampRenderer;
-import noppes.npcs.client.renderer.items.ItemToolRenderer;
 import noppes.npcs.client.renderer.items.ScriptedBlockItemRenderer;
 import noppes.npcs.config.ConfigClient;
 import noppes.npcs.config.ConfigItem;
@@ -206,9 +199,6 @@ import noppes.npcs.entity.EntityNpcSlime;
 import noppes.npcs.entity.EntityProjectile;
 import noppes.npcs.entity.data.ModelData;
 import noppes.npcs.entity.data.ModelPartData;
-import noppes.npcs.items.ItemLinked;
-import noppes.npcs.items.ItemNpcTool;
-import noppes.npcs.items.ItemScripted;
 import org.lwjgl.input.Keyboard;
 import tconstruct.client.tabs.InventoryTabCustomNpc;
 import tconstruct.client.tabs.InventoryTabVanilla;
@@ -481,12 +471,6 @@ public class ClientProxy extends CommonProxy {
         else if (gui == EnumGuiType.PlayerTransporter)
             return new GuiTransportSelection(npc);
 
-        else if (gui == EnumGuiType.Script)
-            return new GuiScript(npc);
-
-        else if (gui == EnumGuiType.ScriptItem)
-            return new GuiScriptItem();
-
         else if (gui == EnumGuiType.PlayerCarpentryBench)
             return new GuiNpcCarpentryBench((ContainerCarpentryBench) container);
 
@@ -510,9 +494,6 @@ public class ClientProxy extends CommonProxy {
 
         else if (gui == EnumGuiType.NpcRemote && Minecraft.getMinecraft().currentScreen == null)
             return new GuiNpcRemoteEditor();
-
-        else if (gui == EnumGuiType.ScriptEvent && Minecraft.getMinecraft().currentScreen == null)
-            return new GuiScriptGlobal();
 
         else if (gui == EnumGuiType.PlayerMailman)
             return new GuiMailmanWrite((ContainerMail) container, x == 1, y == 1);
@@ -558,9 +539,6 @@ public class ClientProxy extends CommonProxy {
 
         else if (gui == EnumGuiType.CustomGui)
             return new GuiCustom((ContainerCustomGui) container);
-
-        else if (gui == EnumGuiType.ScriptBlock)
-            return new GuiScriptBlock(x, y, z);
 
         else if (gui == EnumGuiType.Paintbrush)
             return new GuiNpcPaintbrush();
@@ -674,18 +652,6 @@ public class ClientProxy extends CommonProxy {
 
     public EntityPlayer getPlayer() {
         return Minecraft.getMinecraft().thePlayer;
-    }
-
-
-    @Override
-    public void registerItem(Item item) {
-        if (item instanceof ItemScripted || item instanceof ItemLinked) {
-            MinecraftForgeClient.registerItemRenderer(item, new ItemCustomRenderer());
-        } else if (item instanceof ItemNpcTool) {
-            MinecraftForgeClient.registerItemRenderer(item, new ItemToolRenderer());
-        } else {
-            MinecraftForgeClient.registerItemRenderer(item, new NpcItemRenderer());
-        }
     }
 
     public static void bindTexture(ResourceLocation location) {

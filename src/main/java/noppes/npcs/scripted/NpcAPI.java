@@ -106,7 +106,6 @@ import noppes.npcs.entity.EntityCustomNpc;
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.entity.EntityProjectile;
 import noppes.npcs.items.ItemLinked;
-import noppes.npcs.items.ItemScripted;
 import noppes.npcs.scripted.entity.ScriptAnimal;
 import noppes.npcs.scripted.entity.ScriptArrow;
 import noppes.npcs.scripted.entity.ScriptDBCPlayer;
@@ -579,8 +578,6 @@ public class NpcAPI extends AbstractNpcAPI {
             } else {
                 if (itemstack.getItem() instanceof ItemLinked) {
                     scriptStack = new ScriptLinkedItem(itemstack);
-                } else if (itemstack.getItem() instanceof ItemScripted) {
-                    scriptStack = new ScriptCustomItem(itemstack);
                 } else if (itemstack.getItem() instanceof ItemArmor) {
                     scriptStack = new ScriptItemArmor(itemstack);
                 } else if (itemstack.getItem() instanceof ItemWritableBook || itemstack.getItem() instanceof ItemEditableBook || itemstack.getItem() == Items.written_book || itemstack.getItem() == Items.writable_book) {
