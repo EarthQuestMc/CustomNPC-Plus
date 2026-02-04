@@ -2144,7 +2144,7 @@ public abstract class EntityNPCInterface extends EntityCreature implements IEnti
     protected boolean handleMountedMovement(float strafe, float forward) {
         return NPCMountUtil.handleMountedMovement(this, mountState, strafe, forward);
     }
-    
+
     public void performMountedMovement(float strafe, float forward, float moveSpeed) {
         this.moveStrafing = strafe;
         this.moveForward = forward;
@@ -2250,4 +2250,5 @@ public abstract class EntityNPCInterface extends EntityCreature implements IEnti
 
     protected void updateLeashedState() {
     }
+
 }
