@@ -15,6 +15,7 @@ import java.util.List;
 
 
 public class CustomNpcsPermissions {
+    public static final Permission ALL = new Permission("customnpcs.*");
     // Open GUI
     public static final Permission NPC_GUI = new Permission("customnpcs.npc.gui");
     public static final Permission PAINTBRUSH_GUI = new Permission("customnpcs.npc.paintbrush");

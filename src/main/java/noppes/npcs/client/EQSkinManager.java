@@ -110,13 +110,18 @@ public class EQSkinManager {
             if (image == null)
                 return null;
 
-            if (image.getWidth() == 64 && image.getHeight() == 64) {
-                BufferedImage legacy = new BufferedImage(64, 32, BufferedImage.TYPE_INT_ARGB);
-                Graphics g = legacy.getGraphics();
-                g.drawImage(image, 0, 0, null);
+            if (image.getHeight() == 64) {
+                BufferedImage fixed = new BufferedImage(64, 32, BufferedImage.TYPE_INT_ARGB);
+                Graphics graphics = fixed.getGraphics();
 
-                g.dispose();
-                image = legacy;
+                graphics.drawImage(image, 0, 0, 64, 32, 0, 0, 64, 32, null);
+                graphics.drawImage(image, 32, 0, 64, 16, 32, 0, 64, 16, null);
+                graphics.drawImage(image, 16, 16, 40, 32, 16, 32, 40, 48, null);
+                graphics.drawImage(image, 40, 16, 56, 32, 40, 32, 56, 48, null);
+                graphics.drawImage(image, 0, 16, 16, 32, 0, 32, 16, 48, null);
+
+                graphics.dispose();
+                image = fixed;
             }
 
 
