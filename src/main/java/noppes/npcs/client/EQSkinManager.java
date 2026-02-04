@@ -16,49 +16,25 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * EarthQuest Skin Manager
- *
- * Rôle :
- *  - Télécharger les skins depuis l'API EarthQuest
- *  - Les convertir en DynamicTexture
- *  - Les mettre en cache côté client
- *
- * API :
- *  GET https://api.earthquest.fr/request/{username}/skin
- */
+
 @SideOnly(Side.CLIENT)
 public class EQSkinManager {
 
-    /** Cache username -> ResourceLocation */
     private static final Map<String, ResourceLocation> CACHE = new HashMap<>();
 
-    /** Cache des échecs (évite spam API) */
     private static final Map<String, Long> FAILED = new HashMap<>();
 
-    /** Temps avant de réessayer après un échec (ms) */
     private static final long RETRY_DELAY = 60_000; // 1 minute
 
-    private EQSkinManager() {
-    }
-
-    /**
-     * Récupère le skin EarthQuest pour un username
-     *
-     * @param username pseudo du joueur
-     * @return ResourceLocation ou null si échec
-     */
     public static ResourceLocation get(String username) {
         if (username == null || username.isEmpty())
             return null;
 
         username = username.toLowerCase();
 
-        // Déjà en cache
         if (CACHE.containsKey(username))
             return CACHE.get(username);
 
-        // Échec récent → on n'insiste pas
         if (FAILED.containsKey(username)) {
             long lastFail = FAILED.get(username);
             if (System.currentTimeMillis() - lastFail < RETRY_DELAY) {
@@ -78,9 +54,7 @@ public class EQSkinManager {
         return null;
     }
 
-    /**
-     * Supprime un skin du cache (utile si username modifié)
-     */
+
     public static void clear(String username) {
         if (username == null)
             return;
@@ -88,9 +62,7 @@ public class EQSkinManager {
         FAILED.remove(username.toLowerCase());
     }
 
-    /**
-     * Télécharge et crée la texture dynamique
-     */
+
     private static ResourceLocation download(String username) {
         try {
             URL url = new URL("https://api.earthquest.fr/request/" + username + "/skin");
