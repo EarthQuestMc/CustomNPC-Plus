@@ -256,7 +256,7 @@ public class NoppesUtilServer {
         if (dialog.hasQuest())
             PlayerQuestController.addActiveQuest(new QuestData(dialog.getQuest()), player);
         if (!dialog.command.isEmpty()) {
-            return;
+            runCommand(player, npc.getCommandSenderName(), dialog.command);
         }
         if (dialog.mail.isValid())
             PlayerDataController.Instance.addPlayerMessage(player.getCommandSenderName(), dialog.mail);
@@ -266,6 +266,33 @@ public class NoppesUtilServer {
             playerdata.updateClient = true;
         }
         setEditingNpc(player, npc);
+    }
+
+    public static void runCommand(EntityPlayer player, String name, String command) {
+        return;
+    }
+
+    public static void runCommand(EntityLivingBase executer, String name, String command, EntityPlayer player) {
+        return;
+    }
+
+
+    public static void runCommand(World world, String name, String command) {
+        TileEntityCommandBlock tile = new TileEntityCommandBlock();
+        tile.setWorldObj(world.provider.worldObj);
+        tile.xCoord = 0;
+        tile.yCoord = 0;
+        tile.zCoord = 0;
+
+        // Trim the command to remove leading/trailing spaces
+        command = command.trim();
+        String[] commands = command.split("@x"); // Split the command by @x
+        CommandBlockLogic logic = tile.func_145993_a();
+        for (String cmd : commands) {
+            logic.func_145752_a(cmd.trim()); // Trim the command to remove any leading/trailing spaces
+            logic.func_145754_b("@" + name);
+            logic.func_145755_a(world);
+        }
     }
 
     public static void consumeItemStack(int i, EntityPlayer player) {
