@@ -256,7 +256,7 @@ public class NoppesUtilServer {
         if (dialog.hasQuest())
             PlayerQuestController.addActiveQuest(new QuestData(dialog.getQuest()), player);
         if (!dialog.command.isEmpty()) {
-            runCommand(player, npc.getCommandSenderName(), dialog.command);
+            return;
         }
         if (dialog.mail.isValid())
             PlayerDataController.Instance.addPlayerMessage(player.getCommandSenderName(), dialog.mail);
@@ -266,55 +266,6 @@ public class NoppesUtilServer {
             playerdata.updateClient = true;
         }
         setEditingNpc(player, npc);
-    }
-
-    public static void runCommand(EntityPlayer player, String name, String command) {
-        runCommand(player, name, command, player);
-    }
-
-    public static void runCommand(EntityLivingBase executer, String name, String command, EntityPlayer player) {
-        if (player != null)
-            command = command.replace("@dp", player.getCommandSenderName());
-        command = command.replace("@npc", name);
-
-        // Trim the command to remove leading/trailing spaces
-        command = command.trim();
-
-        String[] commands = command.split("@x"); // Split the command by @x
-
-        // Create TileEntityCommandBlock instance outside the loop
-        TileEntityCommandBlock tile = new TileEntityCommandBlock();
-        tile.setWorldObj(executer.worldObj);
-        tile.xCoord = MathHelper.floor_double(executer.posX);
-        tile.yCoord = MathHelper.floor_double(executer.posY);
-        tile.zCoord = MathHelper.floor_double(executer.posZ);
-
-        // Create CommandBlockLogic instance outside the loop
-        CommandBlockLogic logic = tile.func_145993_a();
-        for (String cmd : commands) {
-            logic.func_145752_a(cmd.trim()); // Trim the command to remove any leading/trailing spaces
-            logic.func_145754_b("@" + name);
-            logic.func_145755_a(executer.worldObj);
-        }
-    }
-
-
-    public static void runCommand(World world, String name, String command) {
-        TileEntityCommandBlock tile = new TileEntityCommandBlock();
-        tile.setWorldObj(world.provider.worldObj);
-        tile.xCoord = 0;
-        tile.yCoord = 0;
-        tile.zCoord = 0;
-
-        // Trim the command to remove leading/trailing spaces
-        command = command.trim();
-        String[] commands = command.split("@x"); // Split the command by @x
-        CommandBlockLogic logic = tile.func_145993_a();
-        for (String cmd : commands) {
-            logic.func_145752_a(cmd.trim()); // Trim the command to remove any leading/trailing spaces
-            logic.func_145754_b("@" + name);
-            logic.func_145755_a(world);
-        }
     }
 
     public static void consumeItemStack(int i, EntityPlayer player) {

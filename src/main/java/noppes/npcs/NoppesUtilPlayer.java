@@ -328,9 +328,6 @@ public class NoppesUtilPlayer {
                 GuiClosePacket.closeGUI(player, -1, new NBTTagCompound());
         } else if (option.optionType == EnumOptionType.DialogOption) {
             NoppesUtilServer.openDialog(player, npc, option.getDialog(), optionId + 1);
-        } else if (option.optionType == EnumOptionType.CommandBlock) {
-            GuiClosePacket.closeGUI(player, -1, new NBTTagCompound());
-            NoppesUtilServer.runCommand(player, npc.getCommandSenderName(), option.command);
         } else
             GuiClosePacket.closeGUI(player, -1, new NBTTagCompound());
     }

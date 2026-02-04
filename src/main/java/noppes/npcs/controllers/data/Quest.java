@@ -51,6 +51,7 @@ public class Quest implements ICompatibilty, IQuest {
     public int nextQuestid = -1;
     public String nextQuestTitle = "";
     public PlayerMail mail = new PlayerMail();
+    public String command = "";
 
     public QuestInterface questInterface = new QuestItem();
     public long customCooldown = 0;
@@ -76,6 +77,7 @@ public class Quest implements ICompatibilty, IQuest {
         logText = compound.getString("Text");
         completeText = compound.getString("CompleteText");
         completerNpc = compound.getString("CompleterNpc");
+        command = compound.getString("QuestCommand");
         nextQuestid = compound.getInteger("NextQuestId");
         nextQuestTitle = compound.getString("NextQuestTitle");
         if (hasNewQuest())
@@ -131,6 +133,7 @@ public class Quest implements ICompatibilty, IQuest {
         compound.setString("NextQuestTitle", nextQuestTitle);
         compound.setInteger("RewardExp", rewardExp);
         compound.setTag("Rewards", rewardItems.getToNBT());
+        compound.setString("QuestCommand", command);
         compound.setBoolean("RandomReward", randomReward);
         compound.setLong("CustomCooldown", customCooldown);
 
