@@ -42,17 +42,5 @@ public class InventoryTabCustomNpc extends AbstractTab {
         if (tab == -100) {
             mc.displayGuiScreen(new GuiQuestLog());
         }
-        if (tab == -101) {
-            mc.displayGuiScreen(new GuiParty());
-        }
-        if (tab == -102) {
-            mc.displayGuiScreen(new GuiFaction());
-        }
-        if (tab == -103) {
-            mc.displayGuiScreen(new GuiSettings());
-        }
-        if (tab == -104) {
-            mc.displayGuiScreen(new GuiProfiles());
-        }
     }
 }

@@ -13,8 +13,6 @@ import noppes.npcs.controllers.data.CustomEffect;
 import noppes.npcs.controllers.data.PlayerData;
 import noppes.npcs.controllers.data.PlayerEffect;
 import org.lwjgl.input.Mouse;
-import tconstruct.client.tabs.InventoryTabCustomNpc;
-import tconstruct.client.tabs.TabRegistry;
 
 public class GuiCNPCInventory extends GuiNPCInterface {
     public static final ResourceLocation specialIcons = new ResourceLocation("customnpcs", "textures/gui/icons.png");
@@ -33,10 +31,6 @@ public class GuiCNPCInventory extends GuiNPCInterface {
     public void initGui() {
         super.initGui();
         guiTop += 10;
-
-        TabRegistry.updateTabValues(guiLeft, guiTop, InventoryTabCustomNpc.class);
-        TabRegistry.addTabsToList(buttonList);
-
 
         int y = 3;
         GuiMenuSideButton questsButton = new GuiMenuSideButton(-100, guiLeft + xSize + 37, this.guiTop + y, 22, 22, "");
