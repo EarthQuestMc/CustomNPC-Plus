@@ -153,6 +153,9 @@ public class SubGuiNpcProjectiles extends SubGuiInterface implements ITextfieldL
             stats.pTrail = EnumParticleType.values()[button.getValue()];
             initGui();
         }
+        if (button.id == 90) {
+            setSubGui(new SubGuiScriptParticle(stats.pCustom));
+        }
         if (button.id == 6) {
             stats.pGlows = (button.getValue() == 1);
         }

@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 import noppes.npcs.client.ClientCacheHandler;
 import noppes.npcs.client.gui.global.GuiNPCManageEffects;
+import noppes.npcs.client.gui.script.GuiScriptEffect;
 import noppes.npcs.client.gui.util.GuiMenuTopButton;
 import noppes.npcs.client.gui.util.GuiNpcButtonYesNo;
 import noppes.npcs.client.gui.util.GuiNpcLabel;
@@ -199,13 +200,13 @@ public class SubGuiEffectGeneral extends SubGuiInterface implements ITextfieldLi
             close();
             return;
         }
-        /*if (id == -2) {
+        if (id == -2) {
             PacketClient.sendClient(new EffectSavePacket(effect.writeToNBT(false), originalName));
             GuiScriptEffect scriptGUI = new GuiScriptEffect(parent, effect);
             scriptGUI.setWorldAndResolution(mc, width, height);
             scriptGUI.initGui();
             mc.currentScreen = scriptGUI;
-        }*/
+        }
         if (id == 10) {
             GuiNpcButtonYesNo button = (GuiNpcButtonYesNo) guibutton;
             effect.lossOnDeath = button.getBoolean();

@@ -524,6 +524,10 @@ public class NoppesUtilPlayer {
             PlayerDataController.Instance.addPlayerMessage(player.getCommandSenderName(), data.quest.mail);
         }
 
+        if (!data.quest.command.isEmpty()) {
+            NoppesUtilServer.runCommand(player, "QuestCompletion", data.quest.command);
+        }
+
         PlayerQuestController.setQuestFinished(data.quest, player);
         if (data.quest.hasNewQuest()) {
             QuestData nextQuest = new QuestData(data.quest.getNextQuest());
@@ -636,6 +640,12 @@ public class NoppesUtilPlayer {
                 data.quest.factionOptions.addPoints(player);
                 if (data.quest.mail.isValid()) {
                     PlayerDataController.Instance.addPlayerMessage(player.getCommandSenderName(), data.quest.mail);
+                }
+            }
+
+            if (meetsCommand) {
+                if (!data.quest.command.isEmpty()) {
+                    NoppesUtilServer.runCommand(player, "QuestCompletion", data.quest.command);
                 }
             }
 

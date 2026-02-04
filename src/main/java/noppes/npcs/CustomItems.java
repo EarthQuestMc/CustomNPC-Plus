@@ -109,12 +109,14 @@ import noppes.npcs.items.ItemNpcCloner;
 import noppes.npcs.items.ItemNpcColored;
 import noppes.npcs.items.ItemNpcInterface;
 import noppes.npcs.items.ItemNpcMovingPath;
+import noppes.npcs.items.ItemNpcScripter;
 import noppes.npcs.items.ItemNpcTool;
 import noppes.npcs.items.ItemNpcWand;
 import noppes.npcs.items.ItemNpcWeaponInterface;
 import noppes.npcs.items.ItemOrb;
 import noppes.npcs.items.ItemPlaceholder;
 import noppes.npcs.items.ItemRotatedShield;
+import noppes.npcs.items.ItemScripted;
 import noppes.npcs.items.ItemScythe;
 import noppes.npcs.items.ItemShield;
 import noppes.npcs.items.ItemSkirt;
@@ -352,9 +354,11 @@ public class CustomItems {
         }
         wand = new ItemNpcWand().setUnlocalizedName("npcWand").setFull3D();
         cloner = new ItemNpcCloner().setUnlocalizedName("npcMobCloner").setFull3D();
+        scripter = new ItemNpcScripter().setUnlocalizedName("npcScripter").setFull3D();
         moving = new ItemNpcMovingPath().setUnlocalizedName("npcMovingPath").setFull3D();
         mount = new ItemMounter().setUnlocalizedName("npcMounter").setFull3D();
         teleporter = new ItemTeleporter().setUnlocalizedName("npcTeleporter").setFull3D();
+        scripted_item = new ItemScripted().setUnlocalizedName("scripted_item").setFull3D();
         linked_item = new ItemLinked().setUnlocalizedName("linked_item").setFull3D();
         tool = new ItemNpcTool().setUnlocalizedName("npcTool").setFull3D();
 

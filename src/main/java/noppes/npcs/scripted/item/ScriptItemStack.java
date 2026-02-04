@@ -27,6 +27,7 @@ import noppes.npcs.NoppesUtilPlayer;
 import noppes.npcs.api.INbt;
 import noppes.npcs.api.item.IItemStack;
 import noppes.npcs.items.ItemLinked;
+import noppes.npcs.items.ItemScripted;
 import noppes.npcs.scripted.CustomNPCsException;
 import noppes.npcs.scripted.NpcAPI;
 import noppes.npcs.scripted.ScriptNbt;
@@ -326,6 +327,9 @@ public class ScriptItemStack implements IItemStack {
 
         if (item.getItem() instanceof ItemLinked) {
             return new ScriptLinkedItem(item);
+        }
+        if (item.getItem() instanceof ItemScripted) {
+            return new ScriptCustomItem(item);
         }
         if (item.getItem() == Items.written_book || item.getItem() == Items.writable_book || item.getItem() instanceof ItemWritableBook || item.getItem() instanceof ItemEditableBook)
             return new ScriptItemBook(item);

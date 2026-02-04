@@ -111,6 +111,9 @@ public class SubGuiNpcDialog extends SubGuiInterface implements ISubGuiListener,
         if (id == 9 && dialog.id >= 0) {
             setSubGui(new GuiSoundSelection((getTextField(2).getText())));
         }
+        if (id == 10) {
+            setSubGui(new SubGuiNpcCommand(dialog.command));
+        }
         if (id == 11) {
             setSubGui(new SubGuiNpcDialogVisual(dialog));
         }
@@ -166,6 +169,8 @@ public class SubGuiNpcDialog extends SubGuiInterface implements ISubGuiListener,
         if (subgui instanceof SubGuiNpcTextArea) {
             SubGuiNpcTextArea gui = (SubGuiNpcTextArea) subgui;
             dialog.text = gui.text;
+        } else if (subgui instanceof SubGuiNpcCommand) {
+            dialog.command = ((SubGuiNpcCommand) subgui).command;
         } else if (subgui instanceof GuiQuestSelection) {
             GuiQuestSelection gqs = (GuiQuestSelection) subgui;
             if (gqs.selectedQuest != null) {

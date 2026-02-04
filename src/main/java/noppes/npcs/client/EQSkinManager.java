@@ -16,7 +16,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-
 @SideOnly(Side.CLIENT)
 public class EQSkinManager {
 
@@ -25,6 +24,9 @@ public class EQSkinManager {
     private static final Map<String, Long> FAILED = new HashMap<>();
 
     private static final long RETRY_DELAY = 60_000; // 1 minute
+
+    private EQSkinManager() {
+    }
 
     public static ResourceLocation get(String username) {
         if (username == null || username.isEmpty())
@@ -54,14 +56,12 @@ public class EQSkinManager {
         return null;
     }
 
-
     public static void clear(String username) {
         if (username == null)
             return;
         CACHE.remove(username.toLowerCase());
         FAILED.remove(username.toLowerCase());
     }
-
 
     private static ResourceLocation download(String username) {
         try {
