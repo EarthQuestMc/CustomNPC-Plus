@@ -70,9 +70,6 @@ public class SubGuiNpcDialog extends SubGuiInterface implements ISubGuiListener,
         addButton(new GuiNpcButton(13, guiLeft + 4, guiTop + 154, 144, 20, "mailbox.setup"));
         addButton(new GuiNpcButton(14, guiLeft + 150, guiTop + 154, 20, 20, "X"));
 
-        addButton(new GuiNpcButton(10, guiLeft + 303, guiTop + 130, 50, 20, "selectServer.edit"));
-        addLabel(new GuiNpcLabel(10, "advMode.command", guiLeft + 180, guiTop + 130 + 5));
-
         addButton(new GuiNpcButtonYesNo(15, guiLeft + 303, guiTop + 154, dialog.disableEsc));
         addLabel(new GuiNpcLabel(15, "dialog.disableEsc", guiLeft + 180, guiTop + 154 + 5));
 
@@ -110,9 +107,6 @@ public class SubGuiNpcDialog extends SubGuiInterface implements ISubGuiListener,
         }
         if (id == 9 && dialog.id >= 0) {
             setSubGui(new GuiSoundSelection((getTextField(2).getText())));
-        }
-        if (id == 10) {
-            setSubGui(new SubGuiNpcCommand(dialog.command));
         }
         if (id == 11) {
             setSubGui(new SubGuiNpcDialogVisual(dialog));
@@ -169,8 +163,6 @@ public class SubGuiNpcDialog extends SubGuiInterface implements ISubGuiListener,
         if (subgui instanceof SubGuiNpcTextArea) {
             SubGuiNpcTextArea gui = (SubGuiNpcTextArea) subgui;
             dialog.text = gui.text;
-        } else if (subgui instanceof SubGuiNpcCommand) {
-            dialog.command = ((SubGuiNpcCommand) subgui).command;
         } else if (subgui instanceof GuiQuestSelection) {
             GuiQuestSelection gqs = (GuiQuestSelection) subgui;
             if (gqs.selectedQuest != null) {

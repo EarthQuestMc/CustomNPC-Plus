@@ -63,9 +63,6 @@ public class SubGuiNpcQuest extends SubGuiInterface implements ISubGuiListener, 
         addLabel(new GuiNpcLabel(10, "faction.options", guiLeft + 180, guiTop + 33));
         addButton(new GuiNpcButton(10, guiLeft + 303, guiTop + 28, 50, 20, "selectServer.edit"));
 
-        addLabel(new GuiNpcLabel(11, "advMode.command", guiLeft + 180, guiTop + 57));
-        addButton(new GuiNpcButton(11, guiLeft + 303, guiTop + 52, 50, 20, "selectServer.edit"));
-
         addLabel(new GuiNpcLabel(6, "gui.type", guiLeft + 180, guiTop + 81));
         addButton(new GuiNpcButton(6, guiLeft + 240, guiTop + 76, 60, 20, new String[]{"quest.item", "quest.dialog", "quest.kill", "quest.location", "quest.areakill", "quest.manual"}, quest.type.ordinal()));
         addButton(new GuiNpcButton(7, guiLeft + 303, guiTop + 76, 50, 20, "selectServer.edit"));
@@ -150,9 +147,6 @@ public class SubGuiNpcQuest extends SubGuiInterface implements ISubGuiListener, 
         if (button.id == 10) {
             setSubGui(new SubGuiNpcFactionOptions(quest.factionOptions));
         }
-        if (button.id == 11) {
-            setSubGui(new SubGuiNpcCommand(quest.command));
-        }
         if (button.id == 12 && quest.id >= 0) {
             quest.nextQuestid = -1;
             parent.nextQuestName = "";
@@ -215,11 +209,6 @@ public class SubGuiNpcQuest extends SubGuiInterface implements ISubGuiListener, 
                 quest.logText = gui.text;
             else
                 quest.completeText = gui.text;
-        } else if (subgui instanceof SubGuiNpcCommand) {
-            SubGuiNpcCommand sub = (SubGuiNpcCommand) subgui;
-            quest.command = sub.command;
-            initGui();
-
         } else if (subgui instanceof SubGuiNpcCooldownPicker) {
             SubGuiNpcCooldownPicker cooldownGui = (SubGuiNpcCooldownPicker) subgui;
             quest.customCooldown = cooldownGui.cooldownValue;
