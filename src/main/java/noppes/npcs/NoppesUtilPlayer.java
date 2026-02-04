@@ -639,12 +639,6 @@ public class NoppesUtilPlayer {
                 }
             }
 
-            if (meetsCommand) {
-                if (!data.quest.command.isEmpty()) {
-                    NoppesUtilServer.runCommand(player, "QuestCompletion", data.quest.command);
-                }
-            }
-
             if (meetsComplete) {
                 PlayerQuestController.setQuestPartyFinished(data.quest, player, data);
             }
