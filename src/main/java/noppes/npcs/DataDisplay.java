@@ -54,7 +54,7 @@ public class DataDisplay {
     public ArrayList<UUID> invisibleToList = new ArrayList<>();
 
     @SideOnly(Side.CLIENT)
-    public HashSet<Integer> tempInvisIds = new HashSet<>();
+    public HashSet<Integer> tempInvisIds;
 
     public DataDisplay(EntityNPCInterface npc) {
         this.npc = npc;
@@ -217,6 +217,9 @@ public class DataDisplay {
 
     @SideOnly(Side.CLIENT)
     public boolean getTempScriptInvisible(int entityId) {
-        return tempInvisIds != null && tempInvisIds.contains(entityId);
+        if (tempInvisIds == null) {
+            tempInvisIds = new HashSet<>();
+        }
+        return tempInvisIds.contains(entityId);
     }
 }
