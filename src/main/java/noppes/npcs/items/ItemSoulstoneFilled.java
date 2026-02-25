@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import noppes.npcs.CustomNpcs;
 import noppes.npcs.LogWriter;
 import noppes.npcs.config.ConfigDebug;
 import noppes.npcs.constants.EnumRoleType;
@@ -31,7 +32,8 @@ public class ItemSoulstoneFilled extends Item {
     @Override
     public Item setUnlocalizedName(String name) {
         super.setUnlocalizedName(name);
-        GameRegistry.registerItem(this, name);
+        //GameRegistry.registerItem(this, name);
+        CustomNpcs.proxy.itemRegister(this, name);
         return this;
     }
 

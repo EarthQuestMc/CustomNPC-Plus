@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import noppes.npcs.CustomItems;
+import noppes.npcs.CustomNpcs;
 
 public class ItemNpcArmor extends ItemArmor {
 
@@ -28,7 +29,8 @@ public class ItemNpcArmor extends ItemArmor {
 
     @Override
     public Item setUnlocalizedName(String name) {
-        GameRegistry.registerItem(this, name);
+        //GameRegistry.registerItem(this, name);
+        CustomNpcs.proxy.itemRegister(this, name);
         return super.setUnlocalizedName(name);
     }
 }

@@ -53,7 +53,8 @@ public class ItemNpcScripter extends Item {
 
     @Override
     public Item setUnlocalizedName(String name) {
-        GameRegistry.registerItem(this, name);
+        //GameRegistry.registerItem(this, name);
+        CustomNpcs.proxy.itemRegister(this, name);
         return super.setUnlocalizedName(name);
     }
 }

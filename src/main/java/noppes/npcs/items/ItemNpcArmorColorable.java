@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import noppes.npcs.CustomItems;
+import noppes.npcs.CustomNpcs;
 
 public class ItemNpcArmorColorable extends ItemArmor {
 
@@ -106,7 +107,8 @@ public class ItemNpcArmorColorable extends ItemArmor {
 
     @Override
     public Item setUnlocalizedName(String name) {
-        GameRegistry.registerItem(this, name);
+        //GameRegistry.registerItem(this, name);
+        CustomNpcs.proxy.itemRegister(this, name);
         return super.setUnlocalizedName(name);
     }
 }

@@ -13,6 +13,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import noppes.npcs.CustomItems;
+import noppes.npcs.CustomNpcs;
 import noppes.npcs.CustomNpcsPermissions;
 import noppes.npcs.NoppesUtilServer;
 import noppes.npcs.config.ConfigMain;
@@ -90,7 +91,8 @@ public class ItemNpcMovingPath extends Item {
 
     @Override
     public Item setUnlocalizedName(String name) {
-        GameRegistry.registerItem(this, name);
+        //GameRegistry.registerItem(this, name);
+        CustomNpcs.proxy.itemRegister(this, name);
         return super.setUnlocalizedName(name);
     }
 }

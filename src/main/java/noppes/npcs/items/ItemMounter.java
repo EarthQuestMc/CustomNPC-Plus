@@ -8,6 +8,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import noppes.npcs.CustomItems;
+import noppes.npcs.CustomNpcs;
 
 
 public class ItemMounter extends Item {
@@ -35,7 +36,8 @@ public class ItemMounter extends Item {
 
     @Override
     public Item setUnlocalizedName(String name) {
-        GameRegistry.registerItem(this, name);
+        //GameRegistry.registerItem(this, name);
+        CustomNpcs.proxy.itemRegister(this, name);
         return super.setUnlocalizedName(name);
     }
 }

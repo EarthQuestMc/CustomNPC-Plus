@@ -1,6 +1,9 @@
 package noppes.npcs;
 
+import com.google.common.collect.ObjectArrays;
 import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.common.registry.GameData;
+import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -8,11 +11,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.stats.Achievement;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 import noppes.npcs.api.IWorld;
 import noppes.npcs.blocks.tiles.TileNpcContainer;
+import noppes.npcs.config.ConfigRegistry;
 import noppes.npcs.constants.EnumGuiType;
 import noppes.npcs.containers.ContainerAnvilRepair;
 import noppes.npcs.containers.ContainerCarpentryBench;
@@ -40,9 +45,19 @@ import noppes.npcs.controllers.data.AnimationData;
 import noppes.npcs.controllers.data.PlayerData;
 import noppes.npcs.entity.EntityNPCInterface;
 
+import java.lang.reflect.Constructor;
+
 public class CommonProxy implements IGuiHandler {
     public boolean newVersionAvailable = false;
     public int revision = 1;
+
+    private int registryItemID;
+    private int registryBlockID;
+
+    public void init() {
+        this.registryBlockID = ConfigRegistry.StartBlockID;
+        this.registryItemID = ConfigRegistry.StartItemID;
+    }
 
     public void load() {
     }
@@ -199,5 +214,50 @@ public class CommonProxy implements IGuiHandler {
 
     public boolean isGUIOpen() {
         return false;
+    }
+
+    public void itemRegister(Item item, String unlocalizedName) {
+        while (Item.getItemById(this.registryItemID) != null) {
+            this.registryItemID++;
+        }
+
+        int itemID = ConfigRegistry.config.get("items", unlocalizedName, this.registryItemID).getInt();
+        if(itemID == this.registryItemID ){
+            ConfigRegistry.save();
+            this.registryItemID++;
+        }
+
+        GameData.getItemRegistry().addObject(itemID, unlocalizedName, item);
+    }
+
+    public void blockRegister(Block block, Class<? extends ItemBlock> itemBlockClass, String unlocalizedName){
+        while (Item.getItemById(this.registryBlockID) != null) {
+            this.registryBlockID++;
+        }
+
+        int blockID = ConfigRegistry.config.get("blocks", unlocalizedName, this.registryBlockID).getInt();
+        if(blockID == this.registryBlockID ){
+            ConfigRegistry.save();
+            this.registryBlockID++;
+        }
+
+        ItemBlock itemBlock = null;
+        try {
+            Class<?>[] ctorArgClasses = new Class<?>[1];
+            ctorArgClasses[0] = Block.class;
+            Constructor<? extends ItemBlock> itemCtor = itemBlockClass.getConstructor(ctorArgClasses);
+            itemBlock = itemCtor.newInstance(block);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return;
+        }
+
+        GameData.getItemRegistry().addObject(blockID, unlocalizedName, itemBlock);
+        GameData.getBlockRegistry().addObject(blockID, unlocalizedName, block);
+    }
+
+    public void blockRegister(Block block, String unlocalizedName){
+        this.blockRegister(block, ItemBlock.class, unlocalizedName);
     }
 }

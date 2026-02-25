@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import noppes.npcs.CommonProxy;
 import noppes.npcs.CustomItems;
 import noppes.npcs.CustomNpcs;
 import org.lwjgl.opengl.GL11;
@@ -36,7 +37,8 @@ public class ItemNpcInterface extends Item implements ItemRenderInterface {
     @Override
     public Item setUnlocalizedName(String name) {
         super.setUnlocalizedName(name);
-        GameRegistry.registerItem(this, name);
+        //GameRegistry.registerItem(this, name);
+        CustomNpcs.proxy.itemRegister(this, name);
         return this;
     }
 

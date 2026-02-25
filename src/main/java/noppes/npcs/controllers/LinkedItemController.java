@@ -337,6 +337,19 @@ public class LinkedItemController {
             if (file.exists()) {
                 file.delete();
             }
+
+            // Also save a human-readable JSON copy of the linked items map into the mod config folder
+            try {
+                File cfgDir = new File(CustomNpcs.configPath);
+                if (!cfgDir.exists()) {
+                    cfgDir.mkdirs();
+                }
+                File cfgFile = new File(cfgDir, "linkeditems.json");
+                // Use the existing NBT -> JSON utility so format matches other saved JSON files
+                NBTJsonUtil.SaveFile(cfgFile, this.writeMapNBT());
+            } catch (Exception ex) {
+                LogWriter.error("Error saving linkeditems.json", ex);
+            }
         } catch (Exception e) {
             LogWriter.except(e);
         }

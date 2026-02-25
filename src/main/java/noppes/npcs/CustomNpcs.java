@@ -172,6 +172,8 @@ public class CustomNpcs {
         configPath += File.separator;
         LoadConfiguration.init(configPath);
 
+        proxy.init();
+
         EnchantInterface.load();
         CustomItems.load();
 
