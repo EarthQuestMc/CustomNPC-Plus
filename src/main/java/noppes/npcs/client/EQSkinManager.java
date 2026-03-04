@@ -23,14 +23,18 @@ public class EQSkinManager {
 
     private static final Map<String, Long> FAILED = new HashMap<>();
 
+    private static final Map<String, Boolean> DOWNLOADING = new HashMap<>();
+
     private static final long RETRY_DELAY = 60_000; // 1 minute
+
+    private static final ResourceLocation STEVE_SKIN = new ResourceLocation("textures/entity/steve.png");
 
     private EQSkinManager() {
     }
 
     public static ResourceLocation get(String username) {
         if (username == null || username.isEmpty())
-            return null;
+            return STEVE_SKIN;
 
         username = username.toLowerCase();
 
@@ -40,7 +44,7 @@ public class EQSkinManager {
         if (FAILED.containsKey(username)) {
             long lastFail = FAILED.get(username);
             if (System.currentTimeMillis() - lastFail < RETRY_DELAY) {
-                return null;
+                return STEVE_SKIN;
             }
             FAILED.remove(username);
         }
@@ -52,8 +56,7 @@ public class EQSkinManager {
             return loc;
         }
 
-        FAILED.put(username, System.currentTimeMillis());
-        return null;
+        return STEVE_SKIN;
     }
 
     public static void clear(String username) {
