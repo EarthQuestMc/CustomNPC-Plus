@@ -22,7 +22,7 @@ public class EQSkinManager {
     private static final Map<String, ResourceLocation> CACHE = new HashMap<>();
 
     private static final Map<String, Long> FAILED = new HashMap<>();
-        
+
     private static final long RETRY_DELAY = 60_000; // 1 minute
 
     private static final ResourceLocation STEVE_SKIN = new ResourceLocation("textures/entity/steve.png");
