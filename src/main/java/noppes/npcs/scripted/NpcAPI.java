@@ -602,6 +602,13 @@ public class NpcAPI extends AbstractNpcAPI {
 
     public IItemStack createItem(String id, int damage, int size) {
         Item item = (Item) Item.itemRegistry.getObject(id);
+        if (item == null) {
+            try {
+                item = Item.getItemById(Integer.parseInt(id));
+            } catch (NumberFormatException e) {
+                // not a numeric id, ignore
+            }
+        }
         if (item == null)
             return null;
 

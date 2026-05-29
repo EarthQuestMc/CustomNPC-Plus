@@ -1,7 +1,7 @@
 package noppes.npcs.controllers;
 
 import cpw.mods.fml.common.eventhandler.Event;
-import jdk.nashorn.api.scripting.ScriptObjectMirror;
+import javax.script.Invocable;
 import net.minecraft.nbt.NBTTagCompound;
 import noppes.npcs.NBTTags;
 import noppes.npcs.config.ConfigScript;
@@ -42,7 +42,12 @@ public class ScriptContainer {
     private static Method luaCoerce;
     private static Method luaCall;
     private CompiledScript compScript = null;
-    private final HashMap<String, ScriptObjectMirror> cachedFunctions = new HashMap<>();
+
+    private static final String LOG_FUNCTION_SETUP =
+        "var __sc = Java.type('noppes.npcs.controllers.ScriptContainer');\n" +
+        "function log() { var msg = ''; for(var i = 0; i < arguments.length; i++) { msg += arguments[i] + ' '; } var m = msg.trim(); if(m.length > 0) __sc.Current.appendConsole('[LOG] ' + m); }\n" +
+        "function warn() { var msg = ''; for(var i = 0; i < arguments.length; i++) { msg += arguments[i] + ' '; } var m = msg.trim(); if(m.length > 0) __sc.Current.appendConsole('[WARN] ' + m); }\n" +
+        "function error() { var msg = ''; for(var i = 0; i < arguments.length; i++) { msg += arguments[i] + ' '; } var m = msg.trim(); if(m.length > 0) __sc.Current.appendConsole('[ERROR] ' + m); }\n";
 
     public ScriptContainer(IScriptHandler handler) {
         this.handler = handler;
@@ -136,22 +141,28 @@ public class ScriptContainer {
         this.engine.getContext().setWriter(pw);
         this.engine.getContext().setErrorWriter(pw);
 
-        try {
-            if (compScript == null && engine instanceof Compilable)
-                compScript = ((Compilable) engine).compile(getFullCode());
+        synchronized (lock) {
+            Current = this;
+            try {
+                engine.eval(LOG_FUNCTION_SETUP);
 
-            if (compScript != null) {
-                compScript.eval(engine.getContext());
-            } else {
-                engine.eval(getFullCode());
+                if (compScript == null && engine instanceof Compilable)
+                    compScript = ((Compilable) engine).compile(getFullCode());
+
+                if (compScript != null) {
+                    compScript.eval(engine.getContext());
+                } else {
+                    engine.eval(getFullCode());
+                }
+            } catch (Throwable var14) {
+                this.errored = true;
+                var14.printStackTrace(pw);
+            } finally {
+                String errorString = sw.getBuffer().toString().trim();
+                this.appendConsole(errorString);
+                pw.close();
+                Current = null;
             }
-        } catch (Throwable var14) {
-            this.errored = true;
-            var14.printStackTrace(pw);
-        } finally {
-            String errorString = sw.getBuffer().toString().trim();
-            this.appendConsole(errorString);
-            pw.close();
         }
     }
 
@@ -192,8 +203,9 @@ public class ScriptContainer {
             }
 
             try {
+                engine.eval(LOG_FUNCTION_SETUP);
+
                 if (!evaluated) {
-                    this.cachedFunctions.clear();
                     engine.eval(getFullCode());
                     evaluated = true;
                 }
@@ -209,14 +221,8 @@ public class ScriptContainer {
                         unknownFunctions.add(type);
                     }
                 } else {
-                    if (!this.cachedFunctions.containsKey(type)) {
-                        ScriptObjectMirror global = (ScriptObjectMirror) engine.getBindings(ScriptContext.ENGINE_SCOPE);
-                        ScriptObjectMirror func = (ScriptObjectMirror) global.get(type);
-                        this.cachedFunctions.put(type, func);
-                    }
-                    ScriptObjectMirror func = this.cachedFunctions.get(type);
-                    if (func != null) {
-                        func.call(null, event);
+                    if (engine instanceof Invocable) {
+                        ((Invocable) engine).invokeFunction(type, event);
                     }
                 }
             } catch (NoSuchMethodException e) {

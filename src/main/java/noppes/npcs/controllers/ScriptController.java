@@ -63,7 +63,7 @@ public class ScriptController {
 
     public ScriptController() {
         Instance = this;
-        manager = new ScriptEngineManager();
+        manager = new ScriptEngineManager(null);
         if (!ConfigScript.ScriptingEnabled)
             return;
         LogWriter.info("Script Engines Available:");

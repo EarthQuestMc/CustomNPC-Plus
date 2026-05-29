@@ -145,7 +145,7 @@ public class CustomNpcs {
     public void load(FMLPreInitializationEvent ev) {
         PacketHandler.Instance = new PacketHandler();
 
-        MinecraftServer server = MinecraftServer.getServer();
+        MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
         String dir = "";
         if (server != null) {
             dir = new File(".").getAbsolutePath();
@@ -344,7 +344,7 @@ public class CustomNpcs {
     }
 
     public static File getWorldSaveDirectory() {
-        MinecraftServer server = MinecraftServer.getServer();
+        MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
         File saves = new File(".");
         if (server != null && !server.isDedicatedServer()) {
             saves = new File(Minecraft.getMinecraft().mcDataDir, "saves");
@@ -386,7 +386,7 @@ public class CustomNpcs {
     }
 
     public static MinecraftServer getServer() {
-        return MinecraftServer.getServer();
+        return FMLCommonHandler.instance().getMinecraftServerInstance();
     }
 
     public static Side side() {
